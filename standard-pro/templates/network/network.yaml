@@ -1,0 +1,25 @@
+#Your build pipeline references an undefined variable named ‘customerid’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘location’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘environment’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘deploymentregion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘deploymentregion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘location’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘customerid’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘environment’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+steps:
+- task: AzureResourceGroupDeployment@2
+  displayName: 'ARM: Deploy rg-$(customerid)-$(location)-network-$(environment)'
+  inputs:
+    azureSubscription: 'sp-subscription-lms-sharedserices-prod'
+
+    resourceGroupName: 'rg-$(customerid)-$(location)-network-$(environment)'
+
+    location: '$(deploymentregion)'
+
+    csmFile: 'templates/network/network-template.json'
+
+    csmParametersFile: 'templates/network/network-params.json'
+
+    overrideParameters: '-deploymentregion $(deploymentregion) -location $(location) -customerid $(customerid) -environment $(environment) -tier standard -function "network" -vnetsettings {"vnet":[{"name":"vnetprefix","vnetaddress":"10.194.0.0/25"}],"subnets":[{"name":"privatesubnet","publicaddress":"10.194.0.0/27"},{"name":"privatesubnet","privateaddress":"10.194.0.32/27"}],"peering":[{"peerednetwork":"/subscriptions/594e911c-aaeb-45b8-a476-9033fd90c5ef/resourceGroups/rg-sharedservices-ase-networking-prod/providers/Microsoft.Network/virtualNetworks/vnet-sharedservices-ase-prod","peerednetworkaddress":"10.192.128.0/18"}]}'
+
+    deploymentMode: Complete

@@ -1,0 +1,1 @@
+﻿[![Build Status](https://dev.azure.com/linksmodularsolutions/standard/_apis/build/status/Standard-built)](https://dev.azure.com/linksmodularsolutions/standard/_build/latest?definitionId=2)
